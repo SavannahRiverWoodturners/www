@@ -1,0 +1,76 @@
+name: New Meeting Minutes Blog Post
+description: Submit meeting minutes to be published on the website
+title: "[Blog Post] Meeting Minutes - [DATE]"
+labels: ["blog-post", "pending-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Submit Meeting Minutes
+        Fill out the form below to submit meeting minutes for publication on the club website.
+
+  - type: input
+    id: meeting_date
+    attributes:
+      label: Meeting Date
+      description: The date of the meeting (e.g., September 18, 2025)
+      placeholder: "September 18, 2025"
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Author Name
+      description: Your name
+      placeholder: "John Doe"
+    validations:
+      required: true
+
+  - type: input
+    id: post_title
+    attributes:
+      label: Meeting Title
+      description: Title for the blog post (e.g., "September 2025 Meeting Minutes")
+      placeholder: "September 2025 Meeting Minutes"
+    validations:
+      required: true
+
+  - type: textarea
+    id: content
+    attributes:
+      label: Meeting Content
+      description: Paste the meeting minutes content here. You can include basic markdown formatting.
+      placeholder: |
+        No club business discussed.
+
+        Announcements:
+        - Mann Tool Fall Event, Oct 4-5
+        - John is scheduling demos for 2026
+
+        The September demonstration was provided by George Edwards...
+    validations:
+      required: true
+
+  - type: textarea
+    id: images
+    attributes:
+      label: Images with Descriptions
+      description: |
+        Upload images by dragging and dropping them below. After each image, add a description on the next line.
+
+        Example:
+        ![image1](url-will-appear-here)
+        George demonstrating the rough out of the 3-cornered bowl
+
+        ![image2](url-will-appear-here)
+        The bowl mounted in a chuck with tenon visible
+      placeholder: Drag and drop images here, then add descriptions below each one
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **After submitting, a reviewer will approve or deny your post. You'll receive an email notification either way.**
