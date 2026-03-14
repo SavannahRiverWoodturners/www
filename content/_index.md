@@ -1,5 +1,6 @@
 ---
 title: "Home"
+showHeader: false
 ---
 
 ![Hello Vase](/img/hello-vase.jpg)

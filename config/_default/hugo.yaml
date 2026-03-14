@@ -1,0 +1,21 @@
+theme: "dot-org-hugo-theme"
+title: "Savannah River Woodturners Club"
+languageCode: "en-us"
+timeZone: "America/New_York"
+summaryLength: 50
+hasCJKLanguage: false
+contentDir: "content"
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
+
+privacy:
+  youtube:
+    privacyEnhanced: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+permalinks:
+  posts: "/posts/:year/:month/:slug/"

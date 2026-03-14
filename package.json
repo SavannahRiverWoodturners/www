@@ -1,0 +1,14 @@
+{
+  "name": "savannah-river-woodturners",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "hugo server --buildDrafts",
+    "build": "hugo --minify"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "sass-embedded": "^1.89.2"
+  }
+}

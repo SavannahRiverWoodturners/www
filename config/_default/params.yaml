@@ -1,0 +1,18 @@
+description: "Come join the CSRA's finest group of wood turners."
+
+logo_on_white: "/img/srwoodturners-logo.jpg"
+logo_on_black: "/img/srwoodturners-logo.jpg"
+custom_js: []
+custom_css: []
+
+images: ["/img/srwoodturners-logo.jpg"]
+
+social_links:
+  github: ""
+  facebook: ""
+  twitter: ""
+  x: ""
+  youtube: ""
+
+sticky_header: false
+show_search: false
