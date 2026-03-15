@@ -16,7 +16,7 @@
 
   {{ with .Params.demonstrator }}
   <div class="meeting-demo">
-    <div class="meeting-demo__label">November Demonstrator</div>
+    <div class="meeting-demo__label">{{ $.Date.Format "January" }} Demonstrator</div>
     <div class="meeting-demo__name">{{ . }}</div>
     {{ with $.Params.demonstration }}
     <div class="meeting-demo__topic">{{ . }}</div>
@@ -27,6 +27,22 @@
   <div class="meeting-content">
     {{ .Content }}
   </div>
+
+  {{ if site.Data.affiliates }}
+  <div class="affiliates-rail">
+    <span class="affiliates-rail__label">National Affiliates</span>
+    {{ range site.Data.affiliates }}
+    <a class="affiliates-rail__item" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+      {{ if .logo }}
+      <img src="{{ .logo | absURL }}" alt="{{ .name }}">
+      {{ else }}
+      <span class="affiliates-rail__initials">{{ .short }}</span>
+      {{ end }}
+      <span class="affiliates-rail__name">{{ .name }}</span>
+    </a>
+    {{ end }}
+  </div>
+  {{ end }}
 
   {{ with .Params.next_meeting }}
   <div class="meeting-next">

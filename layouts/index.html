@@ -1,0 +1,22 @@
+{{ define "main" }}
+  {{ .Content }}
+
+  {{ if site.Data.affiliates }}
+  <section class="affiliates-section">
+    <h2 class="affiliates-section__heading">Our Affiliates</h2>
+    <div class="affiliates-grid">
+      {{ range site.Data.affiliates }}
+      <a class="affiliate-card" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+        {{ if .logo }}
+        <img class="affiliate-card__logo" src="{{ .logo | absURL }}" alt="{{ .name }}">
+        {{ else }}
+        <div class="affiliate-card__initials">{{ .short }}</div>
+        {{ end }}
+        <div class="affiliate-card__name">{{ .name }}</div>
+        <div class="affiliate-card__desc">{{ .description }}</div>
+      </a>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+{{ end }}
