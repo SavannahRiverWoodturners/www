@@ -3,4 +3,11 @@
   {{- $abs := strings.TrimPrefix "/" $src | absURL -}}
   {{- $src = (urls.Parse $abs).Path -}}
 {{- end -}}
-<img src="{{ $src }}" alt="{{ .Text | safeHTML }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- if .Title -}}
+<figure class="post-figure">
+  <img src="{{ $src }}" alt="{{ .Text | safeHTML }}">
+  <figcaption>{{ .Title | safeHTML }}</figcaption>
+</figure>
+{{- else -}}
+<img src="{{ $src }}" alt="{{ .Text | safeHTML }}">
+{{- end -}}

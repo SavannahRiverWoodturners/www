@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="meeting-minutes">
+
+  <div class="meeting-meta">
+    <div class="meeting-meta__item">
+      <span class="meeting-meta__label">Date</span>
+      <span class="meeting-meta__value">{{ .Date.Format "January 2, 2006" }}</span>
+    </div>
+    {{ with .Params.attendees }}
+    <div class="meeting-meta__item">
+      <span class="meeting-meta__label">Attendance</span>
+      <span class="meeting-meta__value">{{ . }} members &amp; guests</span>
+    </div>
+    {{ end }}
+  </div>
+
+  {{ with .Params.demonstrator }}
+  <div class="meeting-demo">
+    <div class="meeting-demo__label">November Demonstrator</div>
+    <div class="meeting-demo__name">{{ . }}</div>
+    {{ with $.Params.demonstration }}
+    <div class="meeting-demo__topic">{{ . }}</div>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <div class="meeting-content">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.next_meeting }}
+  <div class="meeting-next">
+    <span class="meeting-next__label">Next Meeting</span>
+    <span class="meeting-next__date">{{ . | time.AsTime | time.Format "January 2, 2006" }}</span>
+    {{ with $.Params.next_meeting_location }}
+    <span class="meeting-next__location">@ {{ . }}</span>
+    {{ end }}
+  </div>
+  {{ end }}
+
+</div>
+{{ end }}

@@ -19,13 +19,21 @@ title: "September 2025 Meeting Minutes"
 date: 2025-09-20
 author: "John Doe"
 categories: ["meeting-minutes"]
+attendees: 12
+demonstrator: "Jane Smith"
+demonstration: "Hollow Forms on the Lathe"
+next_meeting: "2025-10-18"
+next_meeting_location: "Wheatly shop"
 ---
 ```
 
+The `layouts/posts/single.html` template renders `attendees`, `demonstrator`, `demonstration`, `next_meeting`, and `next_meeting_location` as styled UI elements above and below the post body.
+
 ## Image Handling
 - Images attached to the GitHub Issue are downloaded to `static/images/posts/YYYY-MM-DD/image-N.jpg`
-- In-content references are rewritten to `/images/posts/YYYY-MM-DD/image-N.jpg`
-- Captions: if the line after an image in the issue body is plain text (not another image), it becomes alt text and an italicized caption
+- In-content references use the image title syntax for captions: `![alt text](/images/posts/YYYY-MM-DD/image-N.jpg "Caption text here")`
+- The Goldmark render hook at `layouts/_default/_markup/render-image.html` wraps titled images in `<figure>`/`<figcaption>` automatically
+- Do **not** use italicized text on the line after an image for captions — use the title syntax above
 
 ## Submit Link
 The "Submit Minutes" page links directly to the issue form:
