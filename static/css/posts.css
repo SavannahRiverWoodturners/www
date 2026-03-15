@@ -262,3 +262,138 @@
 .affiliates-rail__name {
   line-height: 1.2;
 }
+
+/* ── Meeting Dates Page ───────────────────────────────────────────── */
+
+.meeting-next-callout {
+  background: #3d2b1f;
+  color: #fff;
+  padding: 1.5rem 1.75rem;
+  border-radius: 8px;
+  margin-bottom: 2.5rem;
+}
+
+.meeting-next-callout__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #c8a882;
+  margin-bottom: 0.4rem;
+}
+
+.meeting-next-callout__date {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.meeting-next-callout__details {
+  font-size: 0.95rem;
+  color: #d9c4ae;
+}
+
+.meeting-section-heading {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e8e0d8;
+  padding-bottom: 0.5rem;
+}
+
+.meeting-section-heading--past {
+  margin-top: 3rem;
+}
+
+.meeting-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.meeting-list__item {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0ebe5;
+}
+
+.meeting-list__item:last-child {
+  border-bottom: none;
+}
+
+.meeting-list__item--special {
+  background: #fdf8f2;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 4px;
+  border-bottom-color: #e8ddd0;
+}
+
+.meeting-list__date {
+  font-weight: 700;
+  color: #333;
+  min-width: 150px;
+}
+
+.meeting-list__day {
+  color: #999;
+  font-size: 0.88rem;
+}
+
+.meeting-list__time {
+  color: #555;
+  font-size: 0.88rem;
+}
+
+.meeting-list__note {
+  color: #a0621e;
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.meeting-list--past .meeting-list__item {
+  opacity: 0.65;
+}
+
+.meeting-list--past .meeting-list__date {
+  font-weight: 600;
+  color: #555;
+}
+
+.meeting-list__post-link {
+  margin-left: auto;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary-600);
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 1 !important;
+}
+
+.meeting-list__post-link:hover {
+  color: var(--primary-700);
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .meeting-list__item {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .meeting-list__post-link {
+    margin-left: 0;
+    margin-top: 0.25rem;
+  }
+  .meeting-next-callout__date {
+    font-size: 1.35rem;
+  }
+}

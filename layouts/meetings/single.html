@@ -1,0 +1,74 @@
+{{ define "main" }}
+{{- $now := now -}}
+
+{{/* Build a lookup: meeting date string → post page */}}
+{{- $postLinks := newScratch -}}
+{{- range where site.RegularPages "Params.categories" "intersect" (slice "meeting-minutes") -}}
+  {{- $postLinks.Set (.Date.Format "2006-01-02") . -}}
+{{- end -}}
+
+{{/* Split meetings into upcoming and past */}}
+{{- $upcoming := slice -}}
+{{- $past    := slice -}}
+{{- range site.Data.meetings -}}
+  {{- $d := time .date -}}
+  {{- if ge $d $now -}}
+    {{- $upcoming = $upcoming | append . -}}
+  {{- else -}}
+    {{- $past = $past | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $upcoming = sort $upcoming "date" "asc"  -}}
+{{- $past    = sort $past    "date" "desc" -}}
+
+<div class="meeting-dates-page">
+
+  {{ .Content }}
+
+  {{/* ── Next meeting callout ── */}}
+  {{- with index $upcoming 0 -}}
+  <div class="meeting-next-callout">
+    <div class="meeting-next-callout__eyebrow">Next Meeting</div>
+    <div class="meeting-next-callout__date">{{ (time .date).Format "Monday, January 2, 2006" }}</div>
+    <div class="meeting-next-callout__details">
+      {{ .time }}{{ with .note }} &nbsp;·&nbsp; <em>{{ . }}</em>{{ end }}
+    </div>
+  </div>
+  {{- end }}
+
+  {{/* ── Upcoming meetings (skip the first — shown in callout above) ── */}}
+  {{- if gt (len $upcoming) 1 -}}
+  <h2 class="meeting-section-heading">Upcoming Meetings</h2>
+  <ul class="meeting-list">
+    {{- range after 1 $upcoming -}}
+    <li class="meeting-list__item{{ if .note }} meeting-list__item--special{{ end }}">
+      <span class="meeting-list__date">{{ (time .date).Format "January 2, 2006" }}</span>
+      <span class="meeting-list__day">{{ (time .date).Format "Monday" }}</span>
+      <span class="meeting-list__time">{{ .time }}</span>
+      {{- with .note }}<span class="meeting-list__note">{{ . }}</span>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
+
+  {{/* ── Past meetings ── */}}
+  {{- if $past -}}
+  <h2 class="meeting-section-heading meeting-section-heading--past">Past Meetings</h2>
+  <ul class="meeting-list meeting-list--past">
+    {{- range $past -}}
+    {{- $post := $postLinks.Get .date -}}
+    <li class="meeting-list__item">
+      <span class="meeting-list__date">{{ (time .date).Format "January 2, 2006" }}</span>
+      <span class="meeting-list__day">{{ (time .date).Format "Monday" }}</span>
+      <span class="meeting-list__time">{{ .time }}</span>
+      {{- with .note }}<span class="meeting-list__note">{{ . }}</span>{{ end }}
+      {{- if $post }}
+      <a class="meeting-list__post-link" href="{{ $post.Permalink }}">Read more →</a>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
+
+</div>
+{{ end }}

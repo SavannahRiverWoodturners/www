@@ -1,0 +1,77 @@
+# All club meetings in chronological order.
+# Fields: date (YYYY-MM-DD), time, note (optional)
+# The layout template auto-classifies past vs upcoming at build time.
+
+- date: "2025-03-15"
+  time: "9:00 am"
+
+- date: "2025-04-19"
+  time: "9:00 am"
+
+- date: "2025-05-17"
+  time: "9:00 am"
+
+- date: "2025-06-21"
+  time: "9:00 am"
+
+- date: "2025-07-19"
+  time: "9:00 am"
+
+- date: "2025-08-16"
+  time: "9:00 am"
+
+- date: "2025-09-20"
+  time: "9:00 am"
+
+- date: "2025-10-18"
+  time: "9:00 am"
+
+- date: "2025-11-15"
+  time: "9:00 am"
+
+- date: "2025-12-13"
+  time: "12:00 pm"
+  note: "Christmas Party"
+
+- date: "2026-01-17"
+  time: "9:00 am"
+
+- date: "2026-02-21"
+  time: "9:00 am"
+
+- date: "2026-03-21"
+  time: "9:00 am"
+
+- date: "2026-04-18"
+  time: "9:00 am"
+
+- date: "2026-05-16"
+  time: "9:00 am"
+
+- date: "2026-06-20"
+  time: "9:00 am"
+
+- date: "2026-07-18"
+  time: "9:00 am"
+
+- date: "2026-08-15"
+  time: "9:00 am"
+
+- date: "2026-09-19"
+  time: "9:00 am"
+
+- date: "2026-10-17"
+  time: "9:00 am"
+
+- date: "2026-11-21"
+  time: "9:00 am"
+
+- date: "2026-12-01"
+  time: "TBA"
+  note: "Date TBA — Holiday schedule"
+
+- date: "2027-01-16"
+  time: "9:00 am"
+
+- date: "2027-02-20"
+  time: "9:00 am"

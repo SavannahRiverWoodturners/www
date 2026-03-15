@@ -1,0 +1,11 @@
+/* ── Woody color palette — overrides dot-org theme green ─────────── */
+/* These CSS variable overrides cascade correctly because this file    */
+/* loads after the theme's compiled stylesheet.                        */
+
+:root {
+  --primary-400: #c07d3a;  /* warm amber oak    */
+  --primary-500: #a0621e;  /* medium walnut      */
+  --primary-600: #7a4a18;  /* dark walnut        */
+  --primary-700: #5c3410;  /* deep brown         */
+  --primary-800: #3d2b1f;  /* darkest / espresso */
+}
