@@ -12,9 +12,9 @@ next_meeting_location: "Wheatly shop"
 
 Brief notes on club business discussed at the meeting.
 
-## Demonstration: {{ .Params.demonstration }}
+## Demonstration
 
-Introduce the demonstrator and topic here.
+Introduce the demonstrator and topic here. Update front matter fields `demonstrator` and `demonstration` with the actual names and topic.
 
 ---
 
