@@ -1,55 +1,122 @@
 # Architecture
 
 ## Tech Stack
-- **Static site generator:** Hugo (v0.157.0+extended)
-- **Hosting:** GitHub Pages
-- **Deployment:** GitHub Actions (`hugo.yml` — triggers on push to `main`)
-- **Domain:** savannahriverwoodturners.org (CNAME — set this up in repo settings once Pages is enabled)
+
+| Component | Detail |
+|---|---|
+| Static site generator | Hugo v0.157.0+extended |
+| Theme | [dot-org-hugo-theme](https://github.com/cncf/dot-org-hugo-theme) by CNCF (git submodule) |
+| Hosting | GitHub Pages |
+| Deployment | GitHub Actions — `.github/workflows/hugo.yml`, triggers on push to `main` |
+| CSS pipeline | PostCSS + autoprefixer via npm (`postcss.config.js`) |
+| SCSS compilation | Dart Sass (required by theme — separate binary, NOT libsass) |
+| Domain | `savannahriverwoodturners.org` — staging deploys to `/www/` subpath |
 
 ## Hugo Site Structure
 
 ```
 www/
-├── hugo.toml               # Site config: baseURL, title, menu, permalinks
+├── config/
+│   ├── _default/
+│   │   ├── hugo.yaml       # Core settings: theme, language, permalinks, goldmark
+│   │   ├── menus.yaml      # Nav menu (main)
+│   │   └── params.yaml     # Theme params: logos, custom_css, social links
+│   ├── development/
+│   │   └── hugo.yaml       # baseURL: http://localhost:1313/
+│   └── production/
+│       └── hugo.yaml       # baseURL: https://savannahriverwoodturners.org/
+│                           # (overridden at build time by --baseURL from configure-pages)
 ├── content/
-│   ├── _index.md           # Homepage
+│   ├── _index.md           # Homepage (showHeader: false)
 │   ├── contact.md
 │   ├── club-officers.md
-│   ├── meeting-dates.md
+│   ├── meeting-dates.md    # type: meetings — uses layouts/meetings/single.html
 │   ├── club-history.md
 │   ├── submit-minutes.md
 │   └── posts/
-│       ├── _index.md       # Posts list page
-│       └── YYYY-MM-DD-*.md # Individual meeting posts
+│       ├── _index.md
+│       └── YYYY-MM-*.md    # Meeting posts (use layouts/posts/single.html)
+├── data/
+│   ├── meetings.yaml       # All meeting dates — auto-split past/upcoming at build time
+│   └── affiliates.yaml     # AAW, Beyond the Bevel — rendered on homepage + post rail
+├── layouts/
+│   ├── index.html          # Homepage: renders .Content + affiliates grid
+│   ├── meetings/
+│   │   └── single.html     # Meeting dates page: next callout, upcoming list, past list
+│   ├── posts/
+│   │   └── single.html     # Meeting post: metadata bar, demo callout, content, affiliate rail, next meeting
+│   └── _default/
+│       └── _markup/
+│           └── render-image.html  # Goldmark hook: wraps ![alt](src "caption") in <figure>/<figcaption>
+├── archetypes/
+│   └── posts.md            # Scaffold for new meeting posts (hugo new posts/YYYY-MM-slug.md)
 ├── static/
-│   ├── img/                # Logo, hero image, officer photo
-│   └── images/posts/       # Images downloaded from GitHub Issues (auto-populated)
-├── layouts/                # Custom templates (empty — theme will provide these)
-├── themes/                 # Theme goes here (not yet selected)
+│   ├── css/
+│   │   ├── theme.css       # :root overrides — woody color palette (replaces theme green)
+│   │   └── posts.css       # Meeting posts, figures, affiliates, meeting dates page styles
+│   ├── images/
+│   │   ├── affiliates/     # Affiliate logos (aaw-logo.jpg)
+│   │   └── posts/          # Meeting post images, organized by date (YYYY-MM-DD/)
+│   └── img/                # Site-wide assets: logo, hero image, officer photo
+├── themes/
+│   └── dot-org-hugo-theme/ # Git submodule — do not edit directly
+├── inbox/                  # Drop PDF meeting minutes here for conversion to posts
+├── package.json            # npm deps: autoprefixer, postcss, postcss-cli, sass-embedded
+├── postcss.config.js
 └── .github/
     ├── workflows/
-    │   ├── hugo.yml                # Build & deploy to GitHub Pages
-    │   └── process-blog-post.yml  # Issue → post automation
+    │   ├── hugo.yml                # Build & deploy (Node 20, Dart Sass, npm ci, hugo --minify)
+    │   └── process-blog-post.yml  # Issue → post automation (not yet active)
     └── ISSUE_TEMPLATE/
-        └── blog-post.yml           # Form for member submissions
+        └── blog-post.yml           # Member submission form
 ```
+
+## Config Notes
+
+- **No `hugo.toml`** — config is split across `config/` directory
+- **`goldmark.renderer.unsafe: true`** is required — the theme uses HTML in shortcodes
+- **`contentDir: "content"`** — overrides the theme's default `content/en/` multilingual path
+- **`baseURL` at build time:** The workflow uses `--baseURL "${{ steps.pages.outputs.base_url }}/"` which GitHub sets to `https://savannahriverwoodturners.org/www/`. The production config sets it to the root domain as a fallback.
 
 ## Theme
-No theme is selected yet. To add one:
-```bash
-git submodule add https://github.com/author/theme-name themes/theme-name
-```
-Then set `theme = "theme-name"` in `hugo.toml`. Themes being considered:
-Mainroad, PaperMod, Clarity, Ananke.
+
+The dot-org theme uses **Dart Sass** (not libsass). Hugo Extended alone is not enough.
+
+- **Locally:** Dart Sass binary at `~/bin/dart-sass/` (added to PATH in `~/.zprofile`). Run `hugo server` from a shell that has sourced `~/.zprofile`.
+- **CI:** Installed via `sudo snap install dart-sass` in the workflow.
+- **npm:** `sass-embedded` is also in `package.json` as a fallback but the standalone binary is what Hugo uses.
+
+## Subdirectory Deployment Gotchas
+
+The site deploys at `/www/` not `/`. This affects URL generation:
+
+- **CSS/JS paths in params** — must be relative (no leading `/`) so `absURL` appends to the full baseURL. E.g. `logo_on_white: "img/srwoodturners-logo.jpg"` not `"/img/..."`.
+- **Markdown image paths** — `![alt](/images/...)` produces root-relative paths. The render hook at `layouts/_default/_markup/render-image.html` rewrites them by stripping the leading `/`, calling `absURL`, and extracting the path component.
+- **Custom CSS paths** — listed in `params.yaml` without leading `/`, so the theme's `absURL` call resolves correctly.
 
 ## Nav Menu
-Defined in `hugo.toml` under `[menu]`. Order is controlled by `weight`.
-Current order: Contact → Club Officers → Meeting Dates → Club History → Meeting Posts → Submit Minutes.
 
-## Post Permalinks
-Posts use `/posts/:year/:month/:slug/` (set in `hugo.toml`).
+Defined in `config/_default/menus.yaml`. Order controlled by `weight`.
+
+| Name | URL | Weight |
+|---|---|---|
+| Contact | /contact/ | 10 |
+| Club Officers | /club-officers/ | 15 |
+| Meeting Dates | /meeting-dates/ | 20 |
+| Club History | /club-history/ | 30 |
+| Meeting Posts | /posts/ | 40 |
+| Submit Minutes | /submit-minutes/ | 50 |
 
 ## Local Dev
+
 ```bash
-hugo server --buildDrafts   # live-reloads at http://localhost:1313
+# First time only — install deps
+npm install
+
+# Start dev server (must have dart-sass in PATH)
+source ~/.zprofile
+hugo server --buildDrafts --environment development
+# → http://localhost:1313/
 ```
+
+> nvm may shadow system tools in non-interactive shells. If commands like `tail` or `grep` go missing after `source ~/.nvm/nvm.sh`, use Python or dedicated tools instead.
