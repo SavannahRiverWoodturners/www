@@ -1,5 +1,4 @@
 name: Build and Deploy to Staging
-run-name: "Deploy site-0.1.${{ github.run_number }} to staging"
 
 on:
   push:
