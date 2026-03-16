@@ -1,0 +1,166 @@
+/* ── Woody color palette — overrides dot-org theme green ─────────── */
+/* These CSS variable overrides cascade correctly because this file    */
+/* loads after the theme's compiled stylesheet.                        */
+
+
+:root {
+  --primary-400: #c07d3a;  /* warm amber oak    */
+  --primary-500: #a0621e;  /* medium walnut      */
+  --primary-600: #7a4a18;  /* dark walnut        */
+  --primary-700: #5c3410;  /* deep brown         */
+  --primary-800: #3d2b1f;  /* darkest / espresso */
+}
+
+/* ── Page title spacing ───────────────────────────────────────────── */
+
+.title {
+  margin-block-start: 40px;
+  margin-block-end: 30px;
+}
+
+/* ── Club Officers page ───────────────────────────────────────────── */
+
+.officers-photo-wrap {
+  margin: 0 0 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  border: 3px solid var(--primary-400);
+  max-height: 280px;
+}
+
+.officers-photo {
+  width: 100%;
+  height: 280px;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.officers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.officer-card {
+  background: #fdf6ee;
+  border: 1px solid var(--primary-400);
+  border-top: 4px solid var(--primary-500);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.officer-card__role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary-600);
+  margin-bottom: 0.3rem;
+}
+
+.officer-card__name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--primary-800);
+}
+
+/* ── Homepage hero section ────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  width: 100%;
+  max-height: 700px;
+  height: 100vh;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.hero__content {
+  text-align: center;
+  color: white;
+  max-width: 90%;
+}
+
+.hero__title {
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin: 0;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Responsive: smaller on smaller screens */
+@media (max-height: 800px) {
+  .hero {
+    height: auto;
+    max-height: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+    max-height: 500px;
+  }
+
+  .hero__title {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .hero__subtitle {
+    font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+    max-height: 400px;
+  }
+
+  .hero__content {
+    max-width: 95%;
+  }
+
+  .hero__title {
+    font-size: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  .hero__subtitle {
+    font-size: clamp(0.75rem, 2vw, 1rem);
+  }
+}
