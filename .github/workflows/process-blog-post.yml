@@ -11,11 +11,11 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Parse issue body
         id: parse
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const issue = context.payload.issue;
@@ -47,7 +47,7 @@ jobs:
 
       - name: Download images from issue
         id: download
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const images = `${{ steps.parse.outputs.images }}`;
@@ -159,7 +159,7 @@ jobs:
           git push
 
       - name: Comment on issue and close
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const issueNumber = ${{ steps.parse.outputs.issue_number }};
@@ -183,7 +183,7 @@ jobs:
 
     steps:
       - name: Notify submitter and close
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const issue = context.payload.issue;
