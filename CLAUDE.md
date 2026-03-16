@@ -34,4 +34,8 @@ When creating issues, include:
 - **Technical context** — which files/components need changes, relevant code paths
 - **References** — links to inspiration, related docs, or affected code
 
+**Before committing any changes:**
+- Run `hugo server` to verify the build is clean (no errors or warnings)
+- Validate that all acceptance criteria are met and working as intended
+
 Before closing any issue: validate each acceptance criterion, then `git push`. See open issues at `https://github.com/SavannahRiverWoodturners/www/issues`.
