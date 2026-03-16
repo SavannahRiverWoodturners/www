@@ -28,4 +28,10 @@ Hugo-based staging site for the Savannah River Woodturners Club redesign.
 
 ## Issue Workflow
 
+When creating issues, include:
+- **Problem statement** — current state vs desired state
+- **Acceptance criteria** — specific, testable requirements with checkboxes
+- **Technical context** — which files/components need changes, relevant code paths
+- **References** — links to inspiration, related docs, or affected code
+
 Before closing any issue: validate each acceptance criterion, then `git push`. See open issues at `https://github.com/SavannahRiverWoodturners/www/issues`.
