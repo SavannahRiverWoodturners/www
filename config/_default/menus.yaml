@@ -14,6 +14,3 @@ main:
   - name: "Meeting Posts"
     url: "/posts/"
     weight: 40
-  - name: "Submit Minutes"
-    url: "/submit-minutes/"
-    weight: 50
