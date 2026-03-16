@@ -2,6 +2,10 @@
 /* These CSS variable overrides cascade correctly because this file    */
 /* loads after the theme's compiled stylesheet.                        */
 
+html, body {
+  overflow-x: hidden;
+}
+
 :root {
   --primary-400: #c07d3a;  /* warm amber oak    */
   --primary-500: #a0621e;  /* medium walnut      */
