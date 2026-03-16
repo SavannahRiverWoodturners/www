@@ -2,6 +2,7 @@
 title: "Contact Us"
 url: "/contact/"
 weight: 10
+layout: "contact"
 ---
 
 Savannah River Woodturners Club
