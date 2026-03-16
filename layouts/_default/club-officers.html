@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <div class="officers-photo-wrap">
+    <img class="officers-photo" src="{{ .Site.BaseURL }}img/club-officers.jpg" alt="Club Officers group photo">
+  </div>
+
+  {{ if site.Data.officers }}
+  <div class="officers-grid">
+    {{ range site.Data.officers }}
+    <div class="officer-card">
+      <div class="officer-card__role">{{ .role }}</div>
+      <div class="officer-card__name">{{ .name }}</div>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+{{ end }}
