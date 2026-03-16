@@ -1,6 +1,6 @@
 {{ define "main" }}
   <div class="officers-photo-wrap">
-    <img class="officers-photo" src="{{ .Site.BaseURL }}img/club-officers.jpg" alt="Club Officers group photo">
+    <img class="officers-photo" src="{{ "img/club-officers.jpg" | relURL }}" alt="Club Officers group photo">
   </div>
 
   {{ if site.Data.officers }}

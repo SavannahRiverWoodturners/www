@@ -1,6 +1,6 @@
 {{ define "hero" }}
   <section class="hero">
-    <img class="hero__image" src="{{ .Site.BaseURL }}img/hero-lathe.jpg" alt="Woodturning lathe in action">
+    <img class="hero__image" src="{{ "img/hero-lathe.jpg" | relURL }}" alt="Woodturning lathe in action">
     <div class="hero__overlay">
       <div class="hero__content">
         <h1 class="hero__title">{{ .Title }}</h1>
@@ -22,7 +22,7 @@
       {{ range site.Data.affiliates }}
       <a class="affiliate-card" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
         {{ if .logo }}
-        <img class="affiliate-card__logo" src="{{ .logo | absURL }}" alt="{{ .name }}">
+        <img class="affiliate-card__logo" src="{{ .logo | relURL }}" alt="{{ .name }}">
         {{ else }}
         <div class="affiliate-card__initials">{{ .short }}</div>
         {{ end }}
