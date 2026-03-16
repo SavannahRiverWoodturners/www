@@ -115,6 +115,10 @@
   color: #3d2b1f;
 }
 
+.meeting-next__time {
+  color: #555;
+}
+
 .meeting-next__location {
   color: #666;
 }
