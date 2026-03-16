@@ -1,4 +1,4 @@
-{{ define "main" }}
+{{ define "hero" }}
   <section class="hero">
     <img class="hero__image" src="{{ .Site.BaseURL }}img/hero-candidates/lathe-jonathan-caliguire-unsplash.jpg" alt="Woodturning lathe in action">
     <div class="hero__overlay">
@@ -10,7 +10,9 @@
       </div>
     </div>
   </section>
+{{ end }}
 
+{{ define "main" }}
   {{ .Content }}
 
   {{ if site.Data.affiliates }}

@@ -2,9 +2,6 @@
 /* These CSS variable overrides cascade correctly because this file    */
 /* loads after the theme's compiled stylesheet.                        */
 
-html, body {
-  overflow-x: hidden;
-}
 
 :root {
   --primary-400: #c07d3a;  /* warm amber oak    */
@@ -18,13 +15,11 @@ html, body {
 
 .hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   max-height: 700px;
   height: 100vh;
   overflow: hidden;
   margin-bottom: 2rem;
-  left: 50%;
-  margin-left: -50vw;
 }
 
 .hero__image {
