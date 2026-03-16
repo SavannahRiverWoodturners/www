@@ -13,7 +13,38 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ .Content }}
+  {{/* ── Find next upcoming meeting ── */}}
+  {{- $now := now -}}
+  {{- $upcoming := slice -}}
+  {{- range site.Data.meetings -}}
+    {{- if ge (time .date) $now -}}
+      {{- $upcoming = $upcoming | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $upcoming = sort $upcoming "date" "asc" -}}
+
+  <div class="homepage-grid">
+
+    {{/* ── Sidebar (source-first so it stacks above prose on mobile) ── */}}
+    <aside class="homepage-sidebar">
+      {{- with index $upcoming 0 }}
+      <div class="next-meeting-card">
+        <div class="next-meeting-card__eyebrow">Next Meeting</div>
+        <div class="next-meeting-card__date">{{ (time .date).Format "Monday, January 2, 2006" }}</div>
+        <div class="next-meeting-card__details">
+          {{ .time }}{{ with .note }} &nbsp;·&nbsp; <em>{{ . }}</em>{{ end }}
+        </div>
+        <a class="next-meeting-card__link" href="{{ "/meetings/" | relLangURL }}">View all meetings →</a>
+      </div>
+      {{- end }}
+    </aside>
+
+    {{/* ── Main prose ── */}}
+    <div class="homepage-prose">
+      {{ .Content }}
+    </div>
+
+  </div>
 
   {{ if site.Data.affiliates }}
   <section class="affiliates-section">
