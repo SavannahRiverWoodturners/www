@@ -4,8 +4,6 @@ subtitle: "Sharing woodturning techniques, tools, and community"
 showHeader: false
 ---
 
-![Hello Vase](/img/hello-vase.jpg)
-
 # Hello
 
 #### Thank you for your interest in the Savannah River Woodturners Club

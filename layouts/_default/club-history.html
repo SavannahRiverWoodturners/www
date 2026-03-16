@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <div class="history-layout">
+    <div class="history-text">
+      {{ .Content }}
+    </div>
+    <figure class="history-vase">
+      <img src="{{ "img/hello-vase.jpg" | relURL }}" alt="A member-turned vase">
+      <figcaption>A member-turned vase</figcaption>
+    </figure>
+  </div>
+{{ end }}

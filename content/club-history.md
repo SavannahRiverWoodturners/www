@@ -2,6 +2,7 @@
 title: "Club History"
 url: "/club-history/"
 weight: 30
+layout: "club-history"
 ---
 
 The Savannah River Woodturners Club was formed in 2008 with its first meetings at the home shops of George Stewart and Howard Moore. Both men have since been recognized as lifetime members for their guidance and inspiration during those first few months when the concept of a club was more dream than reality. The club continues to grow and has become affiliated with the American Woodturners Association.
