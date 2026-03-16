@@ -21,6 +21,7 @@ Meeting posts live in `content/posts/`. They use a custom layout (`layouts/posts
    ```
 3. Create the post file: `hugo new posts/YYYY-MM-slug.md` (uses `archetypes/posts.md`)
 4. Fill in front matter and write the post body
+5. Update `data/meetings.yaml` — add `location`, `demonstrator`, and `project` to the entry for this meeting date if not already present
 
 ## Front Matter
 
@@ -33,14 +34,28 @@ date: 2025-11-15              # Must match the date in data/meetings.yaml for th
 author: "Savannah River Woodturners"
 categories: ["meeting-minutes"]  # Required — used by meeting dates page to link to this post
 attendees: 14                    # Total headcount (members + guests)
-demonstrator: "Wayne Jensen"
-demonstration: "Glass Bulb Snowmen with String Light Entrails"
-next_meeting: "2026-01-17"       # ISO date — rendered as a banner at the bottom
-next_meeting_location: "Wheatly shop"
+demonstrator: "Wayne Jensen"     # Displayed in the demonstrator callout block
+demonstration: "Glass Bulb Snowmen with String Light Entrails"  # Detailed topic description
 ---
 ```
 
+**Fields no longer needed:** `next_meeting` and `next_meeting_location` are ignored by templates. The "Next Meeting" footer is now auto-sourced from `data/meetings.yaml`.
+
 **Important:** `date` must exactly match the corresponding entry in `data/meetings.yaml` (format `YYYY-MM-DD`). The meeting dates page builds a lookup map keyed by this date to generate the "Read more →" link.
+
+## Updating `data/meetings.yaml` After a Meeting
+
+When creating a post, also update the YAML entry for that meeting date with any metadata that wasn't filled in beforehand:
+
+```yaml
+- date: "2026-02-21"
+  time: "9:00 am"
+  location: "Dixon's s'hanger"
+  demonstrator: "Gene Dixon"
+  project: "Creative problem solving with a spindle key holder"
+```
+
+This ensures the meeting-dates page and the next-meeting footer in subsequent posts all display correct information. The `project` field in YAML is a short schedule label; the `demonstration` field in post front matter is the full topic description — they can differ slightly.
 
 ## Post Body
 
@@ -86,10 +101,10 @@ The Goldmark render hook at `layouts/_default/_markup/render-image.html` automat
 `layouts/posts/single.html` renders these sections in order:
 
 1. **Metadata bar** — date and attendance count from front matter
-2. **Demonstrator callout** — dark wood-toned block with name and topic
+2. **Demonstrator callout** — dark wood-toned block with name (`demonstrator`) and topic (`demonstration`) from front matter
 3. **Post body** — `.Content` (the markdown)
 4. **Affiliate rail** — driven by `data/affiliates.yaml` (AAW, Beyond the Bevel)
-5. **Next meeting banner** — date and location from front matter
+5. **Next meeting banner** — auto-sourced from `data/meetings.yaml`: finds the first entry with a date strictly after the post's own date, displays that entry's date, time, and location
 
 ## GitHub Issue Submission (for club members)
 
@@ -110,5 +125,6 @@ Members without Git access can submit posts via GitHub Issues:
 After creating a post, push to `main`. The deploy rebuilds the site and the meeting dates page (`data/meetings.yaml` → `layouts/meetings/single.html`) will automatically:
 - Move that meeting from "Upcoming" to "Past"
 - Show a "Read more →" link on that meeting row
+- Display `location`, `demonstrator`, and `project` from the YAML entry inline
 
-No edits to `data/meetings.yaml` are needed — just the post `date` front matter must match.
+No edits to `data/meetings.yaml` are needed solely for the post link — just the post `date` front matter must match. But do update the YAML metadata fields if they weren't filled in when the meeting was scheduled.

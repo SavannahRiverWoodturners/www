@@ -20,10 +20,12 @@ Hugo-based staging site for the Savannah River Woodturners Club redesign.
 - **Nav menu:** defined in `config/_default/menus.yaml`
 - **Color palette:** warm walnut/amber — overrides the theme's green via `static/css/theme.css`
 - **Meeting posts:** use `type: posts` (default); layout in `layouts/posts/single.html`
-- **Meeting dates page:** data-driven from `data/meetings.yaml`; auto-classifies past vs upcoming at build time
+- **Meeting dates page:** data-driven from `data/meetings.yaml`; auto-classifies past vs upcoming at build time; displays `location`, `demonstrator`, `project` for all meetings
+- **Meeting metadata source of truth:** `data/meetings.yaml` — all schedule display (homepage card, meeting-dates page, post "next meeting" footer) reads from here
 - **Affiliates:** driven by `data/affiliates.yaml`; appear on homepage and in post rail
 - **Images in markdown:** use `![alt](src "caption")` title syntax — a render hook wraps them in `<figure>`
-- **Homepage hero:** large 700px image at top of page (`static/img/hero-lathe-shaping.jpg`); change by editing `layouts/index.html` hero section
+- **Homepage:** two-column layout (prose | sidebar); sidebar contains Next Meeting card sourced from `data/meetings.yaml`
+- **Homepage hero:** large 700px image at top of page (`static/img/hero-lathe.jpg`); change by editing `layouts/index.html` hero section
 - **Inbox:** PDF meeting minutes dropped in `inbox/` for conversion to posts
 
 ## Issue Workflow

@@ -40,13 +40,16 @@ www/
 │   ├── meetings.yaml       # All meeting dates — auto-split past/upcoming at build time
 │   └── affiliates.yaml     # AAW, Beyond the Bevel — rendered on homepage + post rail
 ├── layouts/
-│   ├── index.html          # Homepage: defines 'hero' block (full-width image + overlay) and 'main' block (content + affiliates)
+│   ├── index.html          # Homepage: 'hero' block + 'main' block (2-col grid: sidebar w/ Next Meeting card | prose) + affiliates
 │   ├── meetings/
-│   │   └── single.html     # Meeting dates page: next callout, upcoming list, past list
+│   │   └── single.html     # Meeting dates page: next callout, upcoming list, past list (all metadata from YAML)
 │   ├── posts/
-│   │   └── single.html     # Meeting post: metadata bar, demo callout, content, affiliate rail, next meeting
+│   │   └── single.html     # Meeting post: metadata bar, demo callout, content, affiliate rail, next meeting (auto from YAML)
 │   └── _default/
 │       ├── baseof.html     # Custom base layout: renders 'hero' block BEFORE .container.wrap, 'main' inside it
+│       ├── contact.html    # Contact page (layout: contact) — address + phone cards with inline SVG icons
+│       ├── club-officers.html   # Officers page (layout: club-officers) — photo + grid from data/officers.yaml
+│       ├── club-history.html    # History page (layout: club-history) — prose + framed vase image
 │       └── _markup/
 │           └── render-image.html  # Goldmark hook: wraps ![alt](src "caption") in <figure>/<figcaption>
 ├── archetypes/
