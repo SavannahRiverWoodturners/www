@@ -67,6 +67,210 @@
   color: var(--primary-800);
 }
 
+/* ── Club History page ────────────────────────────────────────────── */
+
+.history-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.history-text {
+  flex: 1;
+}
+
+.history-vase {
+  flex: 0 0 260px;
+  margin: 0;
+}
+
+.history-vase img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  border: 4px solid var(--primary-400);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+}
+
+.history-vase figcaption {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--primary-600);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .history-layout {
+    flex-direction: column;
+  }
+
+  .history-vase {
+    flex: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+/* ── Homepage two-column layout ───────────────────────────────────── */
+
+.homepage-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "sidebar"
+    "prose";
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 900px) {
+  .homepage-grid {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "prose sidebar";
+    align-items: start;
+  }
+}
+
+.homepage-prose {
+  grid-area: prose;
+}
+
+.homepage-sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Next Meeting card ─────────────────────────────────────────────── */
+
+.next-meeting-card {
+  background: #fdf6ee;
+  border: 1px solid var(--primary-400);
+  border-top: 4px solid var(--primary-500);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  padding: 1.25rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.next-meeting-card__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--primary-600);
+}
+
+.next-meeting-card__date {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-800);
+  line-height: 1.3;
+}
+
+.next-meeting-card__details {
+  font-size: 0.95rem;
+  color: var(--primary-700);
+}
+
+.next-meeting-card__location {
+  font-size: 0.875rem;
+  color: var(--primary-600);
+}
+
+.next-meeting-card__demo {
+  font-size: 0.875rem;
+  color: var(--primary-700);
+  font-style: italic;
+}
+
+.next-meeting-card__link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-500);
+  text-decoration: none;
+}
+
+.next-meeting-card__link:hover {
+  color: var(--primary-600);
+  text-decoration: underline;
+}
+
+/* ── Contact page ─────────────────────────────────────────────────── */
+
+.contact-card {
+  max-width: 520px;
+  border: 1px solid var(--primary-400);
+  border-top: 4px solid var(--primary-500);
+  border-radius: 8px;
+  background: #fdf6ee;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  padding: 2rem 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.contact-icon {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary-500);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--primary-600);
+  margin-bottom: 0.3rem;
+}
+
+.contact-value {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--primary-800);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.contact-phone {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-600);
+  text-decoration: none;
+}
+
+.contact-phone:hover {
+  color: var(--primary-500);
+  text-decoration: underline;
+}
+
+.contact-person {
+  font-size: 0.9rem;
+  color: var(--primary-700);
+}
+
 /* ── Homepage hero section ────────────────────────────────────────── */
 
 .hero {

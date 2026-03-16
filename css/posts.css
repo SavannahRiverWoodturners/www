@@ -115,6 +115,10 @@
   color: #3d2b1f;
 }
 
+.meeting-next__time {
+  color: #555;
+}
+
 .meeting-next__location {
   color: #666;
 }
@@ -294,6 +298,19 @@
   color: #d9c4ae;
 }
 
+.meeting-next-callout__location {
+  font-size: 0.9rem;
+  color: #c8a882;
+  margin-top: 0.5rem;
+}
+
+.meeting-next-callout__demo {
+  font-size: 0.9rem;
+  color: #d9c4ae;
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
 .meeting-section-heading {
   font-size: 0.85rem;
   font-weight: 700;
@@ -358,6 +375,24 @@
   font-size: 0.85rem;
   font-style: italic;
   font-weight: 600;
+}
+
+.meeting-list__extra {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 1rem;
+  font-size: 0.85rem;
+  padding-top: 0.1rem;
+}
+
+.meeting-list__location {
+  color: #666;
+}
+
+.meeting-list__demo {
+  color: #888;
+  font-style: italic;
 }
 
 .meeting-list--past .meeting-list__item {
