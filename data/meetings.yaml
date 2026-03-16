@@ -39,10 +39,14 @@
 
 - date: "2026-02-21"
   time: "9:00 am"
+  location: "Dixon's s'hanger"
+  demonstrator: "Gene Dixon"
+  project: "Creative problem solving with a spindle key holder"
 
 - date: "2026-03-21"
   time: "9:00 am"
   location: "Wheatly shop, off BelAir Rd"
+  demonstrator: "Richard Cale"
 
 - date: "2026-04-18"
   time: "9:00 am"

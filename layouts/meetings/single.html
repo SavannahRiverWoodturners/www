@@ -82,6 +82,18 @@
       <span class="meeting-list__day">{{ (time .date).Format "Monday" }}</span>
       <span class="meeting-list__time">{{ .time }}</span>
       {{- with .note }}<span class="meeting-list__note">{{ . }}</span>{{ end }}
+      {{- if or .location .demonstrator .project }}
+      <span class="meeting-list__extra">
+        {{- with .location }}<span class="meeting-list__location">{{ . }}</span>{{ end -}}
+        {{- if or .demonstrator .project -}}
+        <span class="meeting-list__demo">
+          {{- with .demonstrator }}{{ . }}{{ end -}}
+          {{- if and .demonstrator .project }} &mdash; {{ end -}}
+          {{- with .project }}{{ . }}{{ end -}}
+        </span>
+        {{- end }}
+      </span>
+      {{- end }}
       {{- if $post }}
       <a class="meeting-list__post-link" href="{{ $post.Permalink }}">Read more →</a>
       {{- end }}
