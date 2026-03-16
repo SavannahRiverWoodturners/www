@@ -40,12 +40,13 @@ www/
 │   ├── meetings.yaml       # All meeting dates — auto-split past/upcoming at build time
 │   └── affiliates.yaml     # AAW, Beyond the Bevel — rendered on homepage + post rail
 ├── layouts/
-│   ├── index.html          # Homepage: renders .Content + affiliates grid
+│   ├── index.html          # Homepage: defines 'hero' block (full-width image + overlay) and 'main' block (content + affiliates)
 │   ├── meetings/
 │   │   └── single.html     # Meeting dates page: next callout, upcoming list, past list
 │   ├── posts/
 │   │   └── single.html     # Meeting post: metadata bar, demo callout, content, affiliate rail, next meeting
 │   └── _default/
+│       ├── baseof.html     # Custom base layout: renders 'hero' block BEFORE .container.wrap, 'main' inside it
 │       └── _markup/
 │           └── render-image.html  # Goldmark hook: wraps ![alt](src "caption") in <figure>/<figcaption>
 ├── archetypes/
@@ -86,6 +87,13 @@ The dot-org theme uses **Dart Sass** (not libsass). Hugo Extended alone is not e
 - **CI:** Installed via `sudo snap install dart-sass` in the workflow.
 - **npm:** `sass-embedded` is also in `package.json` as a fallback but the standalone binary is what Hugo uses.
 
+## Hugo Template Lookup Gotchas
+
+- **Home page template is `layouts/index.html` only.** Hugo does NOT use `layouts/home/index.html` or `layouts/home/baseof.html` for the home page. Only `layouts/index.html` is used. The baseof for it resolves to `layouts/_default/baseof.html`.
+- **Full-width sections:** To render content outside the theme's `.container.wrap`, define a separate block (e.g. `hero`) in `layouts/_default/baseof.html` placed before the container. Use `layouts/index.html` to populate that block. CSS hacks like `width: 100vw` with negative margins are fragile — prefer the block approach.
+- **`overflow-x: hidden` on `html` breaks vertical scrolling** in some browsers. Avoid it.
+- **Static images must be committed to git** — untracked files in `static/` exist locally but are absent in production after deploy.
+
 ## Subdirectory Deployment Gotchas
 
 The site deploys at `/www/` not `/`. This affects URL generation:
@@ -105,7 +113,6 @@ Defined in `config/_default/menus.yaml`. Order controlled by `weight`.
 | Meeting Dates | /meeting-dates/ | 20 |
 | Club History | /club-history/ | 30 |
 | Meeting Posts | /posts/ | 40 |
-| Submit Minutes | /submit-minutes/ | 50 |
 
 ## Local Dev
 
