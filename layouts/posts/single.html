@@ -1,4 +1,15 @@
 {{ define "main" }}
+{{/* ── Find the next meeting after this post's date ── */}}
+{{- $postDate := .Date -}}
+{{- $future := slice -}}
+{{- range site.Data.meetings -}}
+  {{- if gt (time .date) $postDate -}}
+    {{- $future = $future | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $future = sort $future "date" "asc" -}}
+{{- $nextMeeting := index $future 0 -}}
+
 <div class="meeting-minutes">
 
   <div class="meeting-meta">
@@ -44,15 +55,14 @@
   </div>
   {{ end }}
 
-  {{ with .Params.next_meeting }}
+  {{- with $nextMeeting }}
   <div class="meeting-next">
     <span class="meeting-next__label">Next Meeting</span>
-    <span class="meeting-next__date">{{ . | time.AsTime | time.Format "January 2, 2006" }}</span>
-    {{ with $.Params.next_meeting_location }}
-    <span class="meeting-next__location">@ {{ . }}</span>
-    {{ end }}
+    <span class="meeting-next__date">{{ (time .date).Format "January 2, 2006" }}</span>
+    {{- with .time }}<span class="meeting-next__time">{{ . }}</span>{{ end }}
+    {{- with .location }}<span class="meeting-next__location">@ {{ . }}</span>{{ end }}
   </div>
-  {{ end }}
+  {{- end }}
 
 </div>
 {{ end }}
