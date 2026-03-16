@@ -368,3 +368,8 @@
     font-size: clamp(0.75rem, 2vw, 1rem);
   }
 }
+
+.site-version {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}

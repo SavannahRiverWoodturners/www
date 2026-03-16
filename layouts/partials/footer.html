@@ -70,6 +70,9 @@
             <p>{{ .Site.Copyright | default "Copyright &copy; {{< current_year >}} All Rights Reserved. [Dot Org Theme](https://github.com/cncf/dot-org-hugo-theme) for Hugo by [CNCF](https://www.cncf.io)." | markdownify }}</p>
 
             <div class="copyright__accessibility-git-wrapper">
+                {{ if .Site.Params.siteVersion }}
+                <span class="site-version">v{{ .Site.Params.siteVersion }}</span>
+                {{ end }}
                 {{ if .Site.Params.accessibility.help_url }}
                 <a href="{{ .Site.Params.accessibility.help_url }}" class="nowrap">{{ .Site.Params.accessibility.help_text | default
                     "Accessibility Statement" }}</a>

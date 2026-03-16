@@ -1,11 +1,13 @@
 name: Promote to Production
+run-name: "Promote site-${{ inputs.version || 'latest' }} to production"
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version to promote to production (e.g. 0.1.42)"
-        required: true
+        description: "Version to promote to production (e.g. 0.1.42). Leave blank for latest."
+        required: false
+        default: "latest"
         type: string
 
 permissions:
@@ -20,15 +22,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Resolve version
+        id: resolve
+        run: |
+          if [ "${{ inputs.version }}" = "latest" ]; then
+            VERSION=$(gh api "repos/${{ github.repository }}/actions/artifacts" \
+              --paginate \
+              --jq '[.artifacts[] | select(.name | startswith("site-0.1.")) | select(.expired == false)] | sort_by(.created_at) | last | .name' \
+              | sed 's/^site-//')
+            if [ -z "$VERSION" ]; then
+              echo "::error::No unexpired versioned artifacts found"
+              exit 1
+            fi
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Find artifact run ID
         id: find-run
         run: |
           RUN_ID=$(gh api "repos/${{ github.repository }}/actions/artifacts" \
             --paginate \
-            --jq '.artifacts[] | select(.name == "site-${{ inputs.version }}" and .expired == false) | .workflow_run.id' \
+            --jq '.artifacts[] | select(.name == "site-${{ steps.resolve.outputs.version }}" and .expired == false) | .workflow_run.id' \
             | head -1)
           if [ -z "$RUN_ID" ]; then
-            echo "::error::No unexpired artifact found for site-${{ inputs.version }}"
+            echo "::error::No unexpired artifact found for site-${{ steps.resolve.outputs.version }}"
             exit 1
           fi
           echo "run-id=$RUN_ID" >> $GITHUB_OUTPUT
@@ -38,7 +59,7 @@ jobs:
       - name: Download staging artifact
         uses: actions/download-artifact@v4
         with:
-          name: site-${{ inputs.version }}
+          name: site-${{ steps.resolve.outputs.version }}
           run-id: ${{ steps.find-run.outputs.run-id }}
           github-token: ${{ github.token }}
           path: ./public
@@ -52,3 +73,4 @@ jobs:
           clean-exclude: |
             www
             CNAME
+          commit-message: "Promote site-${{ steps.resolve.outputs.version }} to production"
