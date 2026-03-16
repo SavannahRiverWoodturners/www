@@ -1,6 +1,14 @@
 {{ define "main" }}
   <section class="hero">
     <img class="hero__image" src="{{ .Site.BaseURL }}img/hero-candidates/lathe-jonathan-caliguire-unsplash.jpg" alt="Woodturning lathe in action">
+    <div class="hero__overlay">
+      <div class="hero__content">
+        <h1 class="hero__title">{{ .Title }}</h1>
+        {{ if .Params.subtitle }}
+        <p class="hero__subtitle">{{ .Params.subtitle }}</p>
+        {{ end }}
+      </div>
+    </div>
   </section>
 
   {{ .Content }}

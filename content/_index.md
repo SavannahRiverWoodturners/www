@@ -1,5 +1,6 @@
 ---
-title: "Home"
+title: "Savannah River Woodturners Club"
+subtitle: "Sharing woodturning techniques, tools, and community"
 showHeader: false
 ---
 
