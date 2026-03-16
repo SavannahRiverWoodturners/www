@@ -34,6 +34,14 @@
         <div class="next-meeting-card__details">
           {{ .time }}{{ with .note }} &nbsp;·&nbsp; <em>{{ . }}</em>{{ end }}
         </div>
+        {{- with .location }}<div class="next-meeting-card__location">{{ . }}</div>{{ end }}
+        {{- if or .demonstrator .project }}
+        <div class="next-meeting-card__demo">
+          {{- with .demonstrator }}{{ . }}{{ end -}}
+          {{- if and .demonstrator .project }} &mdash; {{ end -}}
+          {{- with .project }}{{ . }}{{ end -}}
+        </div>
+        {{- end }}
         <a class="next-meeting-card__link" href="{{ "/meetings/" | relLangURL }}">View all meetings →</a>
       </div>
       {{- end }}

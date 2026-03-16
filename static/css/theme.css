@@ -178,6 +178,17 @@
   color: var(--primary-700);
 }
 
+.next-meeting-card__location {
+  font-size: 0.875rem;
+  color: var(--primary-600);
+}
+
+.next-meeting-card__demo {
+  font-size: 0.875rem;
+  color: var(--primary-700);
+  font-style: italic;
+}
+
 .next-meeting-card__link {
   display: inline-block;
   margin-top: 0.5rem;

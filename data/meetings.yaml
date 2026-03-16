@@ -1,5 +1,6 @@
 # All club meetings in chronological order.
-# Fields: date (YYYY-MM-DD), time, note (optional)
+# Fields: date (YYYY-MM-DD), time, note (optional),
+#         location (optional), demonstrator (optional), project (optional)
 # The layout template auto-classifies past vs upcoming at build time.
 
 - date: "2025-03-15"
@@ -41,6 +42,7 @@
 
 - date: "2026-03-21"
   time: "9:00 am"
+  location: "Wheatly shop, off BelAir Rd"
 
 - date: "2026-04-18"
   time: "9:00 am"
