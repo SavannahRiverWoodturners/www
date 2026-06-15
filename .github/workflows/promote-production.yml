@@ -9,6 +9,13 @@ on:
         required: false
         default: "latest"
         type: string
+  workflow_call:
+    inputs:
+      version:
+        description: "Version to promote to production. Leave blank for latest."
+        required: false
+        default: "latest"
+        type: string
 
 permissions:
   contents: write

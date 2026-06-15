@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   build:
@@ -58,6 +59,14 @@ jobs:
           path: ./public
           retention-days: 30
           overwrite: true
+
+  promote-to-production:
+    if: github.event_name == 'schedule'
+    needs: deploy-staging
+    uses: ./.github/workflows/promote-production.yml
+    permissions:
+      contents: write
+      actions: read
 
   deploy-staging:
     needs: build
